@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Great Number Game</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'style.css' %}">    
+    <script src="{% static 'js/script.js' %}"></script>
+</head>
+<body>
+    <div class="container">
+        <h1 class="title">Welcome to the Great Number Game!</h1>
+        <h2 class="subtitle">I am thinking of a number between 1 and 100...</h2>
+        <h3>Take a Guess!</h3>
+        <h1 class="response" style="background-color: {{ color }};" >{{ results }}</h1>
+        <h4 class="guesses">You have used this many guesses: <span>{{ count }}</span></h4>
+        <form class="form-inline" action="/guess" method="POST">
+        {% csrf_token %}
+            <div class="form-group ">
+                <input type="number" name="number" class="form-control"  min="1" max="100">
+            </div>
+            <button type="submit" class="btn btn-info">Submit Guess</button>
+        </form>
+        <a href="/redo" type="submit" class="btn btn-lg btn-secondary" id="reset" >Reset</a>
+    </div>
+</body>
+</html>
